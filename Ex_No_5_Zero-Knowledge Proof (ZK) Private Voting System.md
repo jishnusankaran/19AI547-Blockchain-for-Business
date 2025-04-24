@@ -1,21 +1,21 @@
 # Experiment 5: Zero-Knowledge Proof (ZK) Private Voting System
-# Aim:
+# Aim
 To implement a fully private and transparent voting system using Zero-Knowledge Proofs (ZKPs). This ensures that votes are counted fairly without revealing who voted for whom.
 
 # Algorithm:
-Step 1: Voter Registration
+## Step 1: Voter Registration
 Each voter generates a secret vote key and submits a commitment (hashed vote) to the contract.
 
 
-Step 2: Voting Process
+## Step 2: Voting Process
 Voters submit their votes privately using a hash, without revealing their choice.
 
 
-Step 3: ZK Verification
+## Step 3: ZK Verification
 The contract verifies if a vote belongs to a registered voter but does not reveal the actual vote.
 
 
-Step 4: Vote Counting
+## Step 4: Vote Counting
 Once voting ends, the contract reveals the final tally without linking votes to individuals.
 
 
@@ -57,23 +57,27 @@ contract ZKVoting {
 
 ```
 # Expected Output:
-Voters commit their votes privately.
+1.Voters commit their votes privately.
 
 
-When revealed, the contract verifies correctness but keeps votes anonymous.
+2.When revealed, the contract verifies correctness but keeps votes anonymous.
 
 
-Final result is publicly verifiable without exposing individual votes.
-
-
+3.Final result is publicly verifiable without exposing individual votes.
 
 # High-Level Overview:
-Uses ZKPs to ensure anonymous and fair elections.
+1.Uses ZKPs to ensure anonymous and fair elections.
 
+2.Prevents vote tampering while maintaining voter privacy.
 
-Prevents vote tampering while maintaining voter privacy.
+3.Mimics real-world ZK voting applications in governance and DAOs.
 
+## output
+![alt text](ex5.png)
 
-Mimics real-world ZK voting applications in governance and DAOs.
+![alt text](<ex5 true.png>)
+
+![alt text](<ex5 false.png>)
 
 # RESULT: 
+The Experiment have been successfully verified
