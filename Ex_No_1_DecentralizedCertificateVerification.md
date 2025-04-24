@@ -30,14 +30,12 @@ return certificates[certHash];
 }
 ```
 # Expected Output:
-```
-● When the university issues a certificate, it gets stored as a hash.
-● A student or employer can verify the certificate by entering the details.
-● If valid, it returns true; otherwise, false.
-High-Level Overview:
-● Used to prevent fake certificates.
-● Enables quick verification by employers or other institutions.
-● Shows how blockchain can be used in education and credential verification.
-```
+![alt text](<Screenshot 2025-04-24 112134.png>)
+## TRUE
+![alt text](<Screenshot 2025-04-24 112216.png>)
+## FALSE
+![alt text](<Screenshot 2025-04-24 112240.png>)
+ ● When the university issues a certificate, it gets stored as a hash. ● A student or employer can verify the certificate by entering the details. ● If valid, it returns true; otherwise, false. High-Level Overview: ● Used to prevent fake certificates. ● Enables quick verification by employers or other institutions. ● Shows how blockchain can be used in education and credential verification.
 # Result:
 
+Thus the decentralized certificate verification using remix is successfully implemented.
