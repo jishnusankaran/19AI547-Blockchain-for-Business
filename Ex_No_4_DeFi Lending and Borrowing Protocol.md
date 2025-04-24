@@ -1,97 +1,76 @@
-# Experiment 4: DeFi Lending and Borrowing Protocol
 # Aim:
-To build a decentralized lending protocol where users can deposit assets to earn interest and borrow assets by providing collateral. This experiment introduces concepts like overcollateralization, liquidity pools, and interest accrual in DeFi.
-
+To develop a smart contract that tracks the supply chain of luxury goods, ensuring authenticity.
 # Algorithm:
-Step 1: Setup Lending and Borrowing Mechanism
-Users deposit ETH into the contract as liquidity.
+1.The manufacturer records product creation details on-chain.
 
 
-Depositors receive interest based on their deposits.
+2.The product moves through different supply chain checkpoints.
 
 
-Borrowers can borrow ETH but must provide collateral (e.g., 150% of the borrowed amount).
+3.The ownership of the product can be transferred securely.
 
 
-Interest on borrowed funds is calculated dynamically based on utilization rate.
+4.Buyers can verify the product’s authenticity.
 
 
-Step 2: Implement Overcollateralization
-If a borrower’s collateral value drops below a certain liquidation threshold, their collateral is liquidated to repay the debt.
-
-
-Step 3: Allow Liquidation
-If collateral < liquidation threshold, liquidators can repay the borrower's debt and claim their collateral at a discount.
-
-
-
-Program:
+# Program:
 ```
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract DeFiLending {
-    address public owner;
-    uint256 public interestRate = 5; // 5% interest per cycle
-    uint256 public liquidationThreshold = 150; // 150% collateralization
-    mapping(address => uint256) public deposits;
-    mapping(address => uint256) public borrowed;
-    mapping(address => uint256) public collateral;
-
-    event Deposited(address indexed user, uint256 amount);
-    event Borrowed(address indexed user, uint256 amount, uint256 collateral);
-    event Liquidated(address indexed user, uint256 debtRepaid, uint256 collateralSeized);
-
-    constructor() {
-        owner = msg.sender;
+contract LuxurySupplyChain {
+    struct Product {
+        string name;
+        address currentOwner;
+        bool verified;
     }
 
-    function deposit() public payable {
-        require(msg.value > 0, "Deposit must be greater than zero");
-        deposits[msg.sender] += msg.value;
-        emit Deposited(msg.sender, msg.value);
+    mapping(uint256 => Product) public products;
+
+    event ProductRegistered(uint256 productId, string name);
+    event OwnershipTransferred(uint256 productId, address newOwner);
+
+    function registerProduct(uint256 productId, string memory name) public {
+        require(products[productId].currentOwner == address(0), "Product already registered");
+        products[productId] = Product(name, msg.sender, true);
+        emit ProductRegistered(productId, name);
     }
 
-    function borrow(uint256 amount) public payable {
-        require(msg.value >= (amount * liquidationThreshold) / 100, "Not enough collateral");
-        borrowed[msg.sender] += amount;
-        collateral[msg.sender] += msg.value;
-        payable(msg.sender).transfer(amount);
-        emit Borrowed(msg.sender, amount, msg.value);
+    function transferOwnership(uint256 productId, address newOwner) public {
+        require(products[productId].currentOwner == msg.sender, "Not the owner");
+        products[productId].currentOwner = newOwner;
+        emit OwnershipTransferred(productId, newOwner);
     }
 
-    function liquidate(address borrower) public {
-        require(collateral[borrower] < (borrowed[borrower] * liquidationThreshold) / 100, "Not eligible for liquidation");
-        uint256 debt = borrowed[borrower];
-        uint256 seizedCollateral = collateral[borrower];
-
-        borrowed[borrower] = 0;
-        collateral[borrower] = 0;
-        payable(msg.sender).transfer(seizedCollateral);
-        emit Liquidated(borrower, debt, seizedCollateral);
+    function verifyProduct(uint256 productId) public view returns (string memory, address, bool) {
+        Product memory p = products[productId];
+        return (p.name, p.currentOwner, p.verified);
     }
 }
-
 ```
 # Expected Output:
-Users can deposit ETH and earn interest.
+1.A luxury good (e.g., a Rolex watch) is registered on-chain.
 
 
-Users can borrow ETH by providing collateral.
+2.Ownership is transferred at every checkpoint.
 
 
-If collateral < 150% of borrowed amount, liquidators can seize the collateral.
-
+3.Buyers can check the authenticity before purchasing.
 
 
 # High-Level Overview:
-Teaches key DeFi concepts: lending, borrowing, collateral, liquidation.
+1.Helps prevent counterfeit luxury goods.
 
 
-Introduces risk management: overcollateralization and liquidation.
+2.Teaches real-world supply chain use cases.
 
-
-Directly related to DeFi protocols like Aave and Compound.
-
+# OUTPUT:
+![alt text](<exp-3 1.png>)
+### For Register:
+![alt text](<exp-3 2.png>)
+### For Transfer Ownership:
+![alt text](<exp-3 3.png>)
+### For Verification:
+![alt text](<exp-3 4.png>)
 # RESULT : 
-
+Thus, a smart contract that tracks the supply chain of luxury goods and ensuring authenticity is successfully executed.
