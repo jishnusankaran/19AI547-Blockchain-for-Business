@@ -27,7 +27,7 @@ If collateral < liquidation threshold, liquidators can repay the borrower's debt
 
 # Program:
 ```
-// SPDX-License-Identifier: MIT
+//SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
 contract DeFiLending {
@@ -53,11 +53,16 @@ contract DeFiLending {
     }
 
     function borrow(uint256 amount) public payable {
-        require(msg.value >= (amount * liquidationThreshold) / 100, "Not enough collateral");
+        require(msg.value >= (amount * liquidationThreshold) / 100, "Nota enough collateral");
         borrowed[msg.sender] += amount;
         collateral[msg.sender] += msg.value;
         payable(msg.sender).transfer(amount);
         emit Borrowed(msg.sender, amount, msg.value);
+    }
+    function reduceCollateral(address user, uint256 amount) public {
+    require(msg.sender == owner, "Only owner can reduce");
+    require(collateral[user] >= amount, "Not enough collateral to reduce");
+    collateral[user] -= amount;
     }
 
     function liquidate(address borrower) public {
@@ -93,7 +98,9 @@ contract DeFiLending {
 3.Directly related to DeFi protocols like Aave and Compound.
 
 # OUTPUT:
-![alt text](<exp-4 1.png>)
-![alt text](<exp-4 2.png>)
+![alt text](ex-4-1.png)
+![alt text](ex-4-2.png)
+![alt text](ex-4-3.png)
+![alt text](ex-4-4.png)
 # RESULT : 
 Thus, a DeFi Lending and Borrowing Protocol has been successfully built and implenmented on Remix - Ethereum IDE
