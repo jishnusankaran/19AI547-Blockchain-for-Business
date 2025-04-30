@@ -1,23 +1,18 @@
 # Experiment 7: AI-Powered Smart Contract for Decentralized Negotiation
 # Aim:
-# To create a smart contract that integrates AI logic for automated negotiation in decentralized commerce. The contract adjusts price and conditions dynamically based on real-time market trends using an on-chain AI model.
+ To create a smart contract that integrates AI logic for automated negotiation in decentralized commerce. The contract adjusts price and conditions dynamically based on real-time market trends using an on-chain AI model.
 
 # Algorithm:
 ## Step 1: AI-Powered Dynamic Pricing
 Seller lists an item with a minimum price and negotiation range.
 
-
 Buyer submits an offer price.
-
 
 AI logic (simulated using Solidity algorithms) evaluates the price based on:
 
-
 Market demand (tracked using on-chain transactions).
 
-
 Historical transaction data.
-
 
 Time-based price fluctuations.
 
@@ -25,14 +20,11 @@ Time-based price fluctuations.
 ## Step 2: Smart Contract Counteroffer
 The contract automatically generates a counteroffer if the buyer’s price is within the negotiation range.
 
-
 If the buyer accepts, the transaction is executed on-chain.
 
 
 ## Step 3: Settlement and Price Learning
 Every completed transaction updates the price learning algorithm to refine future pricing decisions.
-
-
 
 # Program:
 ```
@@ -101,7 +93,6 @@ If the buyer’s offer is fair, the deal is executed.
 If the offer is too low, the contract suggests a counteroffer.
 
 
-
 # High-Level Overview:
 First-of-its-kind AI-powered pricing contract.
 
@@ -114,6 +105,11 @@ Can be extended to AI oracles for real-time market data.
 
 Inspired by AI-enhanced commerce and eBay-like decentralized auctions.
 
-# RESULT:
+## OUTPUT:
+![alt text](ex7-1.png)
+![alt text](ex7-2.png)
+![alt text](ex7-3.png)
 
+# RESULT:
+Thus, AI-Powered Smart Contract for Decentralized Negotiation has been successfully built and implenmented on Remix
 
